@@ -86,7 +86,6 @@ public class ClientController {
 			return "redirect:login.do";
 		}
 		
-		//컬렉션 값을 csv 형태로 변환
 		String strScope = "";
 		for (int i=0; i < vo.getScopes().size(); i++) {
 			if (i>0)   strScope+=",";
@@ -94,7 +93,6 @@ public class ClientController {
 		}
 		
 		System.out.println(strScope);
-		//scope의 유효성 여부 확인. 유효하지 않으면 400 응답
 		if (!OAuth2Scope.isScopeExistInMap(strScope)) {
 			throw new OAuth2Exception(400, OAuth2ErrorConstant.INVALID_SCOPE);
 		}

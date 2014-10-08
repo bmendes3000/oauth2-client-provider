@@ -33,7 +33,7 @@ public class OAuth2AccessTokenService {
 	
 	@Autowired
 	private OAuth2DAO dao = new OAuth2DAO();
-	//암호화
+	//Token
     public String encrypt(String message) throws Exception {
 
         // use key coss2
@@ -47,7 +47,7 @@ public class OAuth2AccessTokenService {
         return OAuth2Util.binaryToHex(encrypted);
     }
     
-    //복호화
+    //
     public String decrypt(String encrypted) throws Exception {
 
         SecretKeySpec skeySpec = new SecretKeySpec(OAuth2Constant.AES_ENCRYPTION_KEY.getBytes("UTF-8"), "AES");
@@ -75,11 +75,11 @@ public class OAuth2AccessTokenService {
     	}
     }
 	
-    //AccessToken을 검증한 후 TokenVO객체를 리턴(client_id, userid 포함) 
+    //AccessToken을 validation acess token
     public TokenVO validateAccessToken(String access_token) {    
     	try {
     		String[] temp = access_token.split("_");
-    		//클라이언트 해시값
+    		//hash
     		String clientHash = temp[1];
     		
     		String base = decrypt(temp[0]);
@@ -97,9 +97,9 @@ public class OAuth2AccessTokenService {
 
     		System.out.println("### TOKEN BASE GEN : " + userid+"&"+client_id + ", " + uVO.getPassword()+"&"+cVO.getClient_secret());
 
-    		//해시값 검증
+    		//
     		base = uVO.getPassword() + "&" + cVO.getClient_secret();
-    		//사후 해시
+    		//
     		String hash = OAuth2Util.getHmacSha256(base).substring(0, 16);
     		
     		System.out.println(hash + "<><>" + clientHash);
@@ -124,12 +124,5 @@ public class OAuth2AccessTokenService {
     		return null;
     	}
     }
-    
-	// 테스트 코드
-	public static void main(String[] args) {
-
-		
-	}
-
 
 }

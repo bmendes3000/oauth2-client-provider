@@ -18,13 +18,6 @@ import com.multi.oauth2.provider.vo.ClientVO;
 import com.multi.oauth2.provider.vo.TokenVO;
 import com.multi.oauth2.provider.vo.UserVO;
 
-/*
- * 현재 예제는 리소스 서버를 인증서버와 함께 만든 형태이다.
- * 리소스 서버 기능을 분리하랴할 때는 net.oauth.v2 아래의 패키지를 리소스 서버로 배포하여 
- * 사용하면 된다.
- * 권한(scope) 확인 기능은 Spring Interceptor 기능을 이용하는데, 
- * 이때 tbl_token 테이블에 접근이 필요하므로 Sql Map과 dao 클래스도 함께 배포되어야 한다. 
- */
 
 @Controller
 public class ResourceController {
@@ -37,7 +30,7 @@ public class ResourceController {
 		
 		TokenVO tVO = (TokenVO)request.getAttribute(OAuth2Constant.RESOURCE_TOKEN_NAME);
 
-		//1. User 정보
+		//1. User�
 		UserVO uVOTemp = new UserVO();
 		uVOTemp.setUserid(tVO.getUserid());
 		UserVO uVO = null;
@@ -47,10 +40,8 @@ public class ResourceController {
 			e.printStackTrace();
 			throw new OAuth2Exception(500, OAuth2ErrorConstant.SERVER_ERROR);
 		}
-		uVO.setPassword(null);		//의도적으로 null값을...
+		uVO.setPassword(null);
 		
-		//2. Client App 정보
-		//이 예제에서는 이정보를 이용하지 않음. 콘솔로 확인만!!
 		ClientVO cVOTemp = new ClientVO();
 		cVOTemp.setClient_id(tVO.getClient_id());
 		

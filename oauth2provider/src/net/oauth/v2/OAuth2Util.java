@@ -32,10 +32,10 @@ public class OAuth2Util {
 
 	static {
 		mapper = new ObjectMapper();
-		// 1.9.x 버전 이상
+
 		mapper.setSerializationInclusion(Inclusion.NON_NULL);
 		mapper.setSerializationInclusion(Inclusion.NON_EMPTY);
-		// 1.8.x 버전 이하.
+
 		mapper.configure(SerializationConfig.Feature.WRITE_NULL_PROPERTIES,
 				false);
 		mapper.configure(SerializationConfig.Feature.WRITE_EMPTY_JSON_ARRAYS,
@@ -142,7 +142,7 @@ public class OAuth2Util {
 		}
 	}
 
-	// Access Token과 refresh_token을 랜덤하게 생성함.
+	// Access Toke n�.
 	public static String generateToken() {
 		SecureRandom secureRandom;
 		try {
@@ -159,9 +159,6 @@ public class OAuth2Util {
 		}
 	}
 
-	// 용도 : GET 방식으로 access token을 요청할 때 사용
-	// grant_type이 password인 경우(Password Credential 방식인 경우 Access Token 요청할 때)
-	//
 	// Authorization : Basic XXXXXXXXXX
 	public static String generateBasicAuthHeaderString(RequestBaseVO token) {
 		try {

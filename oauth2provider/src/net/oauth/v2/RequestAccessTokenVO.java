@@ -6,7 +6,7 @@ public class RequestAccessTokenVO extends RequestBaseVO {
 	private String username;
 	private String password;
 	private String state;
-	private String refresh_token;		//refresh token 시에만 사용
+	private String refresh_token;		
 	
 	public RequestAccessTokenVO() {
 		super();
